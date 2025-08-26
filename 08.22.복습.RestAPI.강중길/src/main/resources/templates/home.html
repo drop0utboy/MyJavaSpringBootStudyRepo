@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>타로 카드 테스트</title>
+</head>
+
+<body>
+	<h2>당신을 상징하는 타로 카드를 찾아보세요</h2>
+
+	<form id="userForm">
+		이름: <input type="text" name="uname" required><br>
+		생년: <input type="number" name="uyear" required><br>
+		월: <input type="number" name="umonth" required><br>
+		일: <input type="number" name="uday" required><br>
+		<button type="submit">계산하기</button>
+	</form>
+	
+	<!-- 결과를 표시할 영역 -->
+	  <div id="resultBox" style="margin-top: 20px; font-weight: bold;"></div>
+
+	  <script>
+		// 새로고침 방지
+	    document.getElementById("userForm").addEventListener("submit", async function (e) {
+	      e.preventDefault();
+
+	      const formData = new FormData(e.target);
+	      const data = Object.fromEntries(formData.entries());
+
+	      data.uyear = parseInt(data.uyear);
+	      data.umonth = parseInt(data.umonth);
+	      data.uday = parseInt(data.uday);
+
+	      // POST로 계산 요청
+	      const res = await fetch("/submit-user", {
+	        method: "POST",
+	        headers: { "Content-Type": "application/json" },
+	        body: JSON.stringify(data)
+	      });
+
+		  // 자바스크립트 객체로 변환
+	      const rresult = await res.json();
+
+	      // 결과 DTO 생성
+	      const resultDto = {
+	        rname: data.uname,
+	        rresult: rresult
+	      };
+
+	      // POST로 /result-page 전송
+	      const response = await fetch("/result-page", {
+	        method: "POST",
+	        headers: {
+	          "Content-Type": "application/json"
+	        },
+	        body: JSON.stringify(resultDto)
+	      });
+		  
+		  // result에 dto 값 넣기
+		  const result = resultDto; // 혹은 resultDto를 바로 사용해도 OK
+			// 출력할 객체
+		  const html = `
+		    <p>${result.rname}님을 상징하는 타로 카드는 ${result.rresult}번입니다.</p>
+		    <img src="/image/m${String(result.rresult).padStart(2, '0')}.jpg" 
+		         alt="타로 카드 ${result.rresult}번" 
+		         style="max-width:300px; margin-top:10px;" />
+		  `;
+
+				// 결과 박스에 담기
+		      document.getElementById("resultBox").innerHTML = html;
+		  
+		  
+	    });
+	  </script>
+</body>
+
+</html>
