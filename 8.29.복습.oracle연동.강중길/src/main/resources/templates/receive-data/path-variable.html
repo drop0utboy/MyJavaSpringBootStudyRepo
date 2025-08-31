@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+		crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<link href="/css/my.css" rel="stylesheet">
+</head>
+
+<body>
+	
+	
+	
+	<div class="card m-2">
+		<div class="card-header">
+			path-variable 경로 변수
+		</div>
+		<div class="card-body">
+			<div><a href="/receive-data-rest/request-parameter">URL에 값 1개를 전송</a></div>
+			<br />
+			<a href="/receive-data-rest/path-variable2/freeboard/5">URL에 값 2개를 전송</a>
+		
+
+		<hr />
+
+		<button onclick="ajax1()" class="btn btn-warning btn-sm">url에 값 1개를 전송</button>
+		<button onclick="ajax2()" class="mybtn mybtn-info mybtn-sm">url에 값 2개를 전송</button>
+		</div>
+		
+		<script>
+			async function ajax1() {
+				const response = await fetch("/receive-data-rest/path-variable1/5");
+				const json = await response.json(); 
+				console.log(json);
+			}
+			
+			async function ajax2() {
+							const response = await fetch("/receive-data-rest/path-variable2/q_and_a/5");
+							const json = await response.json(); 
+							console.log(json);
+						}
+		</script>
+
+</body>
+
+</html>

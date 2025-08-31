@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+		crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div class="card m-2">
+		<div class="card-header">
+			Servlet Api
+		</div>
+		<div class="card-body">
+
+			<div class="card">
+				<div class="card-header">Servlet Api</div>
+				<div class="card-body">
+					<ul>
+						<li>
+							<a href="/servlet-api/session" class="btn btn-info btn-sm">서블릿api 세션</a>
+							<button onclick="ajax()" class="btn btn-info btn-sm"> 로그인 </button>
+
+							<a href="/servlet-api-rest/login-check" class="btn btn-info btn-sm">로그인 체크</a>
+							<a href="/servlet-api-rest/logout" class="btn btn-info btn-sm">로그 아웃</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+<script>
+	async function ajax() {
+		const response = await fetch("/servlet-api-rest/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				mid: "admin",
+				mpassword: "kosa12345"
+			})
+		});
+
+		const result = await response.text();
+		alert(result);  // "로그인 성공" 또는 "로그인 실패"
+	}
+</script>
+
+
+</html>

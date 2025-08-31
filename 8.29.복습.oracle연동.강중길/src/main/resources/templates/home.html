@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+		crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div class="card m-2">
+		<div class="card-header">
+			Backend-Rest-API
+		</div>
+		<div class="card-body">
+
+			<div class="card">
+				<div class="card-header">HTTP 요청 방식</div>
+				<div class="card-body">
+					<ul>
+						<li>
+							<a href="/http/getmethod" class="btn btn-info btn-sm">GET 방식</a>
+							<a href="/http/postmethod" class="btn btn-info btn-sm">POST 방식</a>
+							<a href="/http/putmethod" class="btn btn-info btn-sm">PUT 방식</a>
+							<a href="/http/deletemethod" class="btn btn-info btn-sm">DELETE 방식</a>
+
+							<hr />
+
+
+							<button onclick="ajax()" class="btn"> post </button>
+							<script>
+								async function ajax() {
+									const response = await fetch("/http-rest/postmethod", {
+										method: "POST"
+									});
+									const json = await response.json();
+									console.log(json);
+
+								}
+							</script>
+							<hr />
+
+							<button onclick="ajax2()" class="btn"> get </button>
+							<script>
+								async function ajax2() {
+									const response = await fetch("/http-rest/getmethod2", {
+										method: "GET"
+									});
+									const json = await response.json();
+									console.log(json);
+
+								}
+							</script>
+							<hr />
+
+							<button onclick="ajax3()" class="btn"> put </button>
+							<script>
+								async function ajax3() {
+									const response = await fetch("/http-rest/putmethod", {
+										method: "PUT"
+									});
+									const json = await response.json();
+									console.log(json);
+
+								}
+							</script>
+							<hr />
+
+							<button onclick="ajax4()" class="btn"> delete </button>
+							<script>
+								async function ajax4() {
+									const response = await fetch("/http-rest/deletemethod", {
+										method: "DELETE"
+									});
+									const json = await response.json();
+									console.log(json);
+
+								}
+							</script>
+							<hr />
+
+							<a href="/receive-data/path-variable" class="btn btn-info btn-sm">경로 변수</a>
+							<a href="/receive-data/request-parameter" class="btn btn-info btn-sm">요청 값</a>
+							<a href="/http/putmethod" class="btn btn-info btn-sm">PUT 방식</a>
+							<a href="/http/deletemethod" class="btn btn-info btn-sm">DELETE 방식</a>
+
+							<hr />
+
+							<a href="/validation/request-parameter" class="btn btn-info btn-sm">유효성 검사 요청 파라메터값 검사</a>
+							<a href="/validation/json" class="btn btn-info btn-sm">Body Json 유효성 검사</a>
+
+							<hr />
+
+							<a href="/di" class="btn btn-info btn-sm">의존성 주입</a>
+
+							<hr />
+
+							<a href="/servlet-api/request-response" class="btn btn-info btn-sm">http ServletRequest and Response </a>
+							<a href="/servlet-api/session" class="btn btn-info btn-sm">http Servlet Session</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>
