@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+  <script>
+    async function join() {
+      let mid = document.querySelector("#mid").value;
+      let mname = document.querySelector("#mname").value;
+      let mpassword = document.querySelector("#mpassword").value;
+      let menabled = document.querySelector("#menabled").checked;
+      let mrole = document.querySelector("#mrole").value;
+      let memail = document.querySelector("#memail").value;
+
+      const member = { mid, mname, mpassword, menabled, mrole, memail };
+      console.log(member);
+
+      try {
+
+        await fetch("http://localhost:8080/db/member-create", {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(member)
+        });
+
+        const result = await response.text();
+        console.log(result);
+
+      } catch (error) {
+      };
+    }
+  </script>
+
+</head>
+
+<body>
+  <div class="card m-2">
+    <div class="card-header">
+      01_where_to.html
+    </div>
+    <div class="card-body">
+      <button onclick="" class="btn btn-info btn-sm me-2">fun1 실행</button>
+
+      <form id="joinForm" name="joinForm" novalidate>
+        <!-- ID -->
+        <div class="form-group mb-3">
+          <label for="mid">ID</label>
+          <input type="text" class="form-control" id="mid" name="mid" value="user1" />
+        </div>
+
+        <!-- 이름 -->
+        <div class="form-group mb-3">
+          <label for="mname">Name</label>
+          <input type="text" class="form-control" id="mname" name="mname" value="사용자1" />
+        </div>
+
+        <!-- 비밀번호 -->
+        <div class="form-group mb-3">
+          <label for="mpassword">Password</label>
+          <input type="password" class="form-control" id="mpassword" name="mpassword" value="12345" />
+        </div>
+
+        <!-- 이메일 -->
+        <div class="form-group mb-3">
+          <label for="memail">Email</label>
+          <input type="email" class="form-control" id="memail" name="memail" value="user1@sgg.com" />
+        </div>
+
+        <!-- 활성화 여부 -->
+        <div class="form-group mb-3">
+          <label for="menabled">Enabled</label>
+          <input type="checkbox" id="menabled" name="menabled" checked />
+        </div>
+
+        <!-- 권한 -->
+        <div class="form-group mb-3">
+          <label for="mrole">Role</label>
+          <select class="form-control" id="mrole" name="mrole">
+            <option value="ROLE_USER" selected>ROLE_USER</option>
+            <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+            <option value="ROLE_MANAGER">ROLE_MANAGER</option>
+          </select>
+        </div>
+      </form>
+
+      <button type="button" class="btn btn-info btn-sm" onclick="join()">가입</button>
+
+    </div>
+  </div>
+</body>
+
+</html>
